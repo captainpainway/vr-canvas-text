@@ -9,7 +9,6 @@ let number = 0;
 
 function processText(text, position, rotation) {
     let textArr = text.split('\n');
-    let height = 30;
     let lines = [];
     for(let j = 0; j < textArr.length; j++) {
         let textSplit = textArr[j].split(' ');
@@ -21,24 +20,21 @@ function processText(text, position, rotation) {
                 if(i == textSplit.length - 1) {
                     lines.push(line.trim());
                     line = '';
-                    height += 20;
                 }
             } else {
                 lines.push(line.trim());
                 line = '';
                 line += textSplit[i] + ' ';
-                height += 20;
             }
         }
         if(j < textArr.length - 1) {
             lines.push(' ');
-            height += 20;
         }
     }
 
     let throwawayCanvas = document.createElement('canvas');
-    throwawayCanvas.height = height;
-    throwawayCanvas.width = 600;
+    throwawayCanvas.height = 1000;
+    throwawayCanvas.width = 1000;
     throwawayCanvas.setAttribute('style', 'display: none');
     throwawayCanvas.setAttribute('id', 'throwaway');
 
@@ -56,7 +52,7 @@ function processText(text, position, rotation) {
     }
 
     let canvas = document.createElement('canvas');
-    canvas.height = height;
+    canvas.height = y;
     canvas.width = Math.round(width + 40);
     canvas.setAttribute('style', 'display: none');
     canvas.setAttribute('id', 'textCanvas'+number);
