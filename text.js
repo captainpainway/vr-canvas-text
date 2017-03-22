@@ -11,12 +11,17 @@ function processText(text, position, rotation) {
     let textArr = text.split('\n');
     let lines = [];
     for(let j = 0; j < textArr.length; j++) {
+        let characters = false, lineLength = 40;
         let textSplit = textArr[j].split(' ');
-        textSplit.length <= 1 ? textSplit = textArr[j].split('') : textSplit = textSplit;
+        if(textSplit.length <= 1) {
+            textSplit = textArr[j].split('');
+            characters = true;
+            lineLength = 30;
+        }
         let line = '';
         for(let i = 0; i < textSplit.length; i++) {
-            if(line.length < 40) {
-                line += textSplit[i] + ' ';
+            if(line.length < lineLength) {
+                characters ? line += textSplit[i] : line += textSplit[i] + ' ';
                 if(i == textSplit.length - 1) {
                     lines.push(line.trim());
                     line = '';
@@ -24,7 +29,7 @@ function processText(text, position, rotation) {
             } else {
                 lines.push(line.trim());
                 line = '';
-                line += textSplit[i] + ' ';
+                characters ? line += textSplit[i] : line += textSplit[i] + ' ';
             }
         }
         if(j < textArr.length - 1) {
